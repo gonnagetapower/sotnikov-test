@@ -1,9 +1,14 @@
 import './App.css';
+import { Header } from './components';
+import PostPage from './pages/PostPage';
 
 function App() {
   return (
     <div className="App">
-      Hello world!
+      <Header />
+      <div className='container'>
+        <PostPage />
+      </div>
     </div>
   );
 }
