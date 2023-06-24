@@ -36,7 +36,7 @@
     bottom: -1px;
     width: 0;
     height: 2px;
-    background-color: #000;
+    background-color: #FA7E61;
     transition: width 0.3s;
 }
 
@@ -44,6 +44,11 @@
 .post-count__item:hover::before {
     width: 100%;
     transition: width 0.3s;
+}
+
+.pagination  {
+    display: flex;
+    justify-content: center;
 }
 
 .posts {

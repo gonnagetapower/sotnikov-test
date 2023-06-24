@@ -3,6 +3,7 @@ import { Post } from '../components';
 import axios from 'axios';
 
 import './PostPage.css';
+import { ConfigProvider, Pagination } from 'antd';
 
 const PostPage = () => {
   const [posts, setPosts] = useState([]);
@@ -12,21 +13,25 @@ const PostPage = () => {
       ? localStorage.getItem('activeCount')
       : 0,
   );
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(counstValues[activeCount]);
 
   const handleCount = (index) => {
     setActiveCount(index);
+    setPageSize(counstValues[index]);
+    setPage(1);
     localStorage.setItem('activeCount', index);
   };
 
   useEffect(() => {
     axios
       .get(
-        `https://jsonplaceholder.typicode.com/posts?_start=0&_limit=${counstValues[activeCount]}`,
+        `https://jsonplaceholder.typicode.com/posts?_start=0&_limit=${pageSize}&_page=${page}`,
       )
       .then((post) => {
         setPosts(post.data);
       });
-  }, [activeCount]);
+  }, [activeCount, page, pageSize]);
 
   return (
     <div className="post-page">
@@ -49,6 +54,27 @@ const PostPage = () => {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="pagination">
+            <ConfigProvider
+              theme={{
+                components: {
+                  Pagination: {
+                    colorPrimary: '#FA7E61',
+                    colorPrimaryHover: '#FD613E',
+                  },
+                },
+              }}>
+              <Pagination
+                responsive={true}
+                simple
+                current={page}
+                onChange={(page) => setPage(page)}
+                total={100}
+                pageSize={pageSize}
+              />
+              {console.log(pageSize)}
+            </ConfigProvider>
           </div>
           {posts.map((post) => (
             <Post key={post.id} title={post.title} body={post.body} />
