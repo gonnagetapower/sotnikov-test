@@ -18,7 +18,7 @@ const EditPost = ({ mode, setMode, user, title, body, postId }) => {
         body: editBody,
       })
       .then((res) => {
-        console.log(res);
+        setMode('view');
       });
   };
 

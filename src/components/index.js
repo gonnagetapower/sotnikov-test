@@ -4,6 +4,9 @@ export { default as Comment }
 export { default as EditPage }
     from './editPage/EditPage.jsx'
 
+export { default as Favorite }
+    from './favorite/Favorite.jsx'
+
 export { default as Header }
     from './header/Header.jsx'
 

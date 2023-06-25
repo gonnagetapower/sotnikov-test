@@ -50,6 +50,12 @@
     position: absolute;
 }
 
+.checkbox {
+    position: absolute;
+    right: 2%;
+    top: 100px;
+}
+
 .post__title {
     margin: 0;
     padding: 0;
@@ -69,4 +75,14 @@
 
 .comments {
     margin-bottom: 15px;
+}
+
+.post-option {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -18%;
 }

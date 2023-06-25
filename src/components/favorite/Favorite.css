@@ -1,0 +1,11 @@
+.favorite {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+}
+
+.favorite svg {
+    cursor: pointer;
+    width: 20px;
+    height: 22px;
+}

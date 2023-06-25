@@ -16,6 +16,12 @@ const PostPage = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(counstValues[activeCount]);
 
+  const [pinnedPost, setPinnedPost] = useState([]);
+
+  const [storageItem, setStorageItem] = useState(() =>
+    JSON.parse(localStorage.getItem('favourites') || '[]'),
+  );
+
   const handleCount = (index) => {
     setActiveCount(index);
     setPageSize(counstValues[index]);
@@ -26,6 +32,29 @@ const PostPage = () => {
   const deletePost = (postId) => {
     const newPosts = posts.filter((el) => el.id !== postId);
     setPosts(newPosts);
+  };
+
+  const deletePinned = () => {
+    let newPosts = posts;
+    for (let i = 0; i < pinnedPost.length; i++) {
+      newPosts = newPosts.filter((el) => el.id !== pinnedPost[i]);
+    }
+    setPosts(newPosts);
+  };
+
+  const addToFavoritedPinned = () => {
+    for (let i = 0; i < pinnedPost.length; i++) {
+      let isFavourited = storageItem.includes(pinnedPost[i]);
+      if (!isFavourited) {
+        const newStorageItem = [...storageItem, pinnedPost[i]];
+        setStorageItem(newStorageItem);
+        localStorage.setItem('favourites', JSON.stringify(newStorageItem));
+      } else {
+        const newStorageItem = storageItem.filter((savedId) => savedId !== pinnedPost[i]);
+        setStorageItem(newStorageItem);
+        localStorage.setItem('favourites', JSON.stringify(newStorageItem));
+      }
+    }
   };
 
   useEffect(() => {
@@ -88,6 +117,12 @@ const PostPage = () => {
               title={post.title}
               body={post.body}
               user={post.userId}
+              pinnedPost={pinnedPost}
+              setPinnedPost={setPinnedPost}
+              deletePinned={deletePinned}
+              storageItem={storageItem}
+              setStorageItem={setStorageItem}
+              addToFavoritedPinned={addToFavoritedPinned}
             />
           ))}
         </div>
