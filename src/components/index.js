@@ -1,6 +1,9 @@
 export { default as Comment }
     from './comment/Comment.jsx'
 
+export { default as EditPage }
+    from './editPage/EditPage.jsx'
+
 export { default as Header }
     from './header/Header.jsx'
 

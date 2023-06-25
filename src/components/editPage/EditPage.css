@@ -1,0 +1,32 @@
+.edit-wrapper {
+    z-index: 100;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+.edit {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.edit__title {
+    font-size: 14px;
+    color: #8181818a;
+}
+
+.edit:hover>.edit__title {
+    color: black;
+}
+
+.view {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.view__title {
+    font-size: 14px;
+    color: #cfa0048a;
+}
