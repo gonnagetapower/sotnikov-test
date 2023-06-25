@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import './Post.css';
 import { Comment, EditPage, User } from '../index';
-import { Button, ConfigProvider } from 'antd';
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { Button, ConfigProvider, Modal } from 'antd';
+import { DownOutlined, UpOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import axios from 'axios';
 import EditPost from '../editPost/EditPost';
 
-const Post = ({ title, body, user, postId }) => {
+const Post = ({ title, body, user, postId, deletePost }) => {
   const [activeBtn, setActiveBtn] = useState(false);
   const [comments, setComments] = useState([]);
 
@@ -22,6 +22,25 @@ const Post = ({ title, body, user, postId }) => {
           setComments(com.data);
         });
     }
+  };
+
+  const { confirm } = Modal;
+
+  const showConfirm = () => {
+    confirm({
+      title: 'Are you sure delete this task?',
+      icon: <ExclamationCircleFilled />,
+      content: 'This action is irreversible.',
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        deletePost(postId);
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
   };
 
   return (
@@ -50,6 +69,9 @@ const Post = ({ title, body, user, postId }) => {
                 type={activeBtn ? 'primary' : 'text'}>
                 Comments
                 {activeBtn ? <UpOutlined /> : <DownOutlined />}
+              </Button>
+              <Button type="primary" danger onClick={showConfirm}>
+                Delete post
               </Button>
             </ConfigProvider>
           </div>

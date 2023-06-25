@@ -62,6 +62,11 @@
     color: #353634;
 }
 
+.btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
 .comments {
     margin-bottom: 15px;
 }

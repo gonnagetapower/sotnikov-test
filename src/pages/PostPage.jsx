@@ -23,6 +23,11 @@ const PostPage = () => {
     localStorage.setItem('activeCount', index);
   };
 
+  const deletePost = (postId) => {
+    const newPosts = posts.filter((el) => el.id !== postId);
+    setPosts(newPosts);
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -77,6 +82,7 @@ const PostPage = () => {
           </div>
           {posts.map((post) => (
             <Post
+              deletePost={deletePost}
               key={post.id}
               postId={post.id}
               title={post.title}
