@@ -73,11 +73,16 @@ const PostPage = () => {
                 total={100}
                 pageSize={pageSize}
               />
-              {console.log(pageSize)}
             </ConfigProvider>
           </div>
           {posts.map((post) => (
-            <Post key={post.id} title={post.title} body={post.body} />
+            <Post
+              key={post.id}
+              postId={post.id}
+              title={post.title}
+              body={post.body}
+              user={post.userId}
+            />
           ))}
         </div>
       </section>
