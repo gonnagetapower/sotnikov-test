@@ -2,8 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { Post } from '../components';
 import axios from 'axios';
 
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
+
+import { ReactComponent as Filter } from './../assets/svg/filter.svg';
+
 import './PostPage.css';
-import { ConfigProvider, Pagination } from 'antd';
+import { ConfigProvider, Dropdown, Input, Pagination, Space } from 'antd';
+
+const { Search } = Input;
+
+const items = [
+  {
+    label: 'dsad',
+    key: '0',
+  },
+  {
+    label: 'sds',
+    key: '1',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    label: '3rd menu item',
+    key: '3',
+  },
+];
 
 const PostPage = () => {
   const [posts, setPosts] = useState([]);
@@ -21,6 +45,14 @@ const PostPage = () => {
   const [storageItem, setStorageItem] = useState(() =>
     JSON.parse(localStorage.getItem('favourites') || '[]'),
   );
+
+  const [hideFilters, setHideFilters] = useState(true);
+  const [filterOrder, setFilterOrder] = useState({
+    title: '',
+    active: false,
+  });
+
+  const [filterValue, setFilterValue] = useState('');
 
   const handleCount = (index) => {
     setActiveCount(index);
@@ -45,12 +77,14 @@ const PostPage = () => {
   const addToFavoritedPinned = () => {
     for (let i = 0; i < pinnedPost.length; i++) {
       let isFavourited = storageItem.includes(pinnedPost[i]);
+      console.log(isFavourited);
       if (!isFavourited) {
-        const newStorageItem = [...storageItem, pinnedPost[i]];
+        const newStorageItem = [...storageItem, ...pinnedPost];
         setStorageItem(newStorageItem);
         localStorage.setItem('favourites', JSON.stringify(newStorageItem));
       } else {
         const newStorageItem = storageItem.filter((savedId) => savedId !== pinnedPost[i]);
+        console.log(newStorageItem);
         setStorageItem(newStorageItem);
         localStorage.setItem('favourites', JSON.stringify(newStorageItem));
       }
@@ -60,12 +94,14 @@ const PostPage = () => {
   useEffect(() => {
     axios
       .get(
-        `https://jsonplaceholder.typicode.com/posts?_start=0&_limit=${pageSize}&_page=${page}`,
+        `https://jsonplaceholder.typicode.com/posts?title_like=${filterValue}&_start=0&_limit=${pageSize}&_page=${page}`,
       )
       .then((post) => {
         setPosts(post.data);
       });
-  }, [activeCount, page, pageSize]);
+  }, [activeCount, page, pageSize, filterValue]);
+
+  const onSearch = (value) => setFilterValue(value);
 
   return (
     <div className="post-page">
@@ -88,6 +124,30 @@ const PostPage = () => {
                 </li>
               ))}
             </ul>
+            <div onClick={() => setHideFilters(!hideFilters)} className="filter-icon">
+              <Filter />
+            </div>
+          </div>
+          <div className={!hideFilters ? 'filter' : 'filter--hide'}>
+            <h3 className="filter__item">
+              <Search onSearch={onSearch} placeholder="search by title" />
+              {/* {filterOrder.title !== 'title' ? (
+                <DownOutlined
+                  onClick={() => setFilterOrder({ title: 'title', active: 'true' })}
+                />
+              ) : (
+                <UpOutlined onClick={() => setFilterOrder({})} />
+              )} */}
+            </h3>
+            <Dropdown className="filter-list" menu={{ items }} trigger={['click']}>
+              <div>
+                Filter by user
+                <DownOutlined />
+              </div>
+            </Dropdown>
+            <h3 className="filter__item">
+              By user favorite <DownOutlined />
+            </h3>
           </div>
           <div className="pagination">
             <ConfigProvider
