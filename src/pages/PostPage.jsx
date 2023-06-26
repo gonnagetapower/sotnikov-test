@@ -13,19 +13,12 @@ const { Search } = Input;
 
 const items = [
   {
-    label: 'dsad',
-    key: '0',
+    label: 'Sort by userId',
+    key: 'userId',
   },
   {
-    label: 'sds',
-    key: '1',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    label: '3rd menu item',
-    key: '3',
+    label: 'Sort by postId',
+    key: 'id',
   },
 ];
 
@@ -91,6 +84,40 @@ const PostPage = () => {
     }
   };
 
+  const sortBy = (type) => {
+    let sorted = [...posts].sort((a, b) => (a[type] < b[type] ? 1 : -1));
+    if (sorted[0][type] === posts[0][type]) {
+      sorted = [...posts].sort((a, b) => (a[type] < b[type] ? -1 : 1));
+    }
+    if (sorted[0][type] > sorted[sorted.length - 1][type]) {
+      setActiveFilter(`By ${type} desc`);
+    } else {
+      setActiveFilter(`By ${type} asc`);
+    }
+    setPosts(sorted);
+    console.log(sorted);
+  };
+
+  const [sortByFav, setSortByFav] = useState(false);
+
+  const sortByFavorite = () => {
+    console.log(storageItem);
+    const sorted = [...posts].sort((b, a) =>
+      !sortByFav
+        ? storageItem.indexOf(a.id) - storageItem.indexOf(b.id)
+        : storageItem.indexOf(b.id) - storageItem.indexOf(a.id),
+    );
+    setSortByFav(!sortByFav);
+    console.log(sortByFav);
+    setPosts(sorted);
+  };
+
+  const [activeFilter, setActiveFilter] = useState('By user');
+
+  const onClick = ({ key }) => {
+    sortBy(key);
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -139,14 +166,18 @@ const PostPage = () => {
                 <UpOutlined onClick={() => setFilterOrder({})} />
               )} */}
             </h3>
-            <Dropdown className="filter-list" menu={{ items }} trigger={['click']}>
+            <Dropdown
+              className="filter-list"
+              menu={{ items, onClick }}
+              trigger={['click']}>
               <div>
-                Filter by user
+                {activeFilter}
                 <DownOutlined />
               </div>
             </Dropdown>
-            <h3 className="filter__item">
-              By user favorite <DownOutlined />
+            <h3 className="filter__item" onClick={sortByFavorite}>
+              By user favorite
+              {!sortByFav ? <DownOutlined /> : <UpOutlined />}
             </h3>
           </div>
           <div className="pagination">
