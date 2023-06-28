@@ -4,6 +4,7 @@ import AlbumPage from './pages/AlbumPage/AlbumPage';
 import PostPage from './pages/PostPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import TaskPage from './pages/TaskPage/TaskPage';
+import PhotosPage from './pages/PhotosPage/PhotosPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path='/' element={<PostPage />} />
             <Route path='/album' element={<AlbumPage />} />
+            <Route path='/album/:id' element={<PhotosPage />} />
             <Route path='/task' element={<TaskPage />} />
           </Routes>
         </div>

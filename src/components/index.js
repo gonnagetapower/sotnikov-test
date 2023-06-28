@@ -16,6 +16,9 @@ export { default as FilterMenu }
 export { default as Header }
     from './header/Header.jsx'
 
+export { default as Photo }
+    from './photo/Photo.jsx'
+
 export { default as Post }
     from './post/Post.jsx'
 

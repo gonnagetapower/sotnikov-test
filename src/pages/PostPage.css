@@ -8,8 +8,6 @@
     gap: 15px;
 }
 
-
-
 .filter-icon > svg{
     position: absolute;
     top: 55%;
@@ -20,42 +18,6 @@
     cursor: pointer;
 }
 
-/* .filter {
-    height: auto;
-    opacity: 1;
-    border: 1px solid #cecdcd;
-    border-radius: 10px;
-    background-color: rgba(255, 198, 165, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 10px;
-    transition: opacity 0.3s linear;
-}
-
-.filter__item {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.filter--hide {
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.filter__order {
-    transform: rotate(180deg);
-}
-
-.filter-list {
-    cursor: pointer;
-}
-
-.filter-list {
-    display: flex;
-    gap: 5px;
-} */
 
 .pagination  {
     display: flex;

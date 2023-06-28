@@ -1,3 +1,9 @@
+.album-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .albums-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -75,4 +81,9 @@
     overflow: hidden;
     color: #fff;
     opacity: 1;
+}
+
+.albums-grid > a {
+    text-decoration: none;
+    color: #000;
 }

@@ -3,10 +3,12 @@ import { fetchAlbums } from '../../http/api';
 
 import './AlbumPage.css';
 import { ConfigProvider, Pagination } from 'antd';
-import { Count } from '../../components';
+import { Count, FilterMenu } from '../../components';
+import { Link } from 'react-router-dom';
+
+const counstValues = [10, 20, 50, 100];
 
 const AlbumPage = () => {
-  const counstValues = [10, 20, 50, 100];
   const [activeCount, setActiveCount] = useState(
     localStorage.getItem('activeCount') !== null
       ? localStorage.getItem('activeCount')
@@ -25,8 +27,8 @@ const AlbumPage = () => {
 
   const [albums, setAlbums] = useState([]);
   useEffect(() => {
-    fetchAlbums().then((album) => setAlbums(album));
-  }, []);
+    fetchAlbums('', pageSize, page).then((album) => setAlbums(album));
+  }, [pageSize, page]);
 
   return (
     <div className="album-page">
@@ -38,6 +40,15 @@ const AlbumPage = () => {
           setHideFilters={setHideFilters}
           hideFilters={hideFilters}
         />
+        {/* <FilterMenu
+          hideFilters={hideFilters}
+          onSearch={onSearch}
+          onClick={onClick}
+          items={items}
+          activeFilter={activeFilter}
+          sortByFavorite={sortByFavorite}
+          sortByFav={sortByFav}
+        /> */}
         <div className="pagination">
           <ConfigProvider
             theme={{
@@ -60,9 +71,11 @@ const AlbumPage = () => {
         </div>
         <div className="albums-grid">
           {albums.map((album) => (
-            <div className="album">
-              <h3 className="album__title">{album.title}</h3>
-            </div>
+            <Link key={album.id} to={`/album/${album.id}`}>
+              <div className="album">
+                <h3 className="album__title">{album.title}</h3>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

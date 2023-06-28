@@ -4,6 +4,7 @@ import { Count, FilterMenu, Post } from '../components';
 import './PostPage.css';
 import { ConfigProvider, Dropdown, Input, Pagination, Space } from 'antd';
 import { fetchPosts } from '../http/api';
+import { sortBy } from '../utils/sortBy';
 
 const items = [
   {
@@ -35,10 +36,6 @@ const PostPage = () => {
   );
 
   const [hideFilters, setHideFilters] = useState(true);
-  const [filterOrder, setFilterOrder] = useState({
-    title: '',
-    active: false,
-  });
 
   const [filterValue, setFilterValue] = useState('');
 
@@ -79,19 +76,6 @@ const PostPage = () => {
     }
   };
 
-  const sortBy = (type) => {
-    let sorted = [...posts].sort((a, b) => (a[type] < b[type] ? 1 : -1));
-    if (sorted[0][type] === posts[0][type]) {
-      sorted = [...posts].sort((a, b) => (a[type] < b[type] ? -1 : 1));
-    }
-    if (sorted[0][type] > sorted[sorted.length - 1][type]) {
-      setActiveFilter(`By ${type} desc`);
-    } else {
-      setActiveFilter(`By ${type} asc`);
-    }
-    setPosts(sorted);
-  };
-
   const [sortByFav, setSortByFav] = useState(false);
 
   const sortByFavorite = () => {
@@ -108,7 +92,7 @@ const PostPage = () => {
   const [activeFilter, setActiveFilter] = useState('By user');
 
   const onClick = ({ key }) => {
-    sortBy(key);
+    sortBy(key, posts, setActiveFilter, setPosts);
   };
 
   useEffect(() => {
