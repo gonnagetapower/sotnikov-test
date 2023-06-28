@@ -11,41 +11,7 @@
     gap: 15px;
 }
 
-.post-count {
-    position: relative;
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-}
 
-.post-count__item {
-    position: relative;
-    display: inline;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.post-count__item:not(:last-child) {
-    margin-right: 10px;
-}
-
-.post-count__item::before {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: -1px;
-    width: 0;
-    height: 2px;
-    background-color: #FA7E61;
-    transition: width 0.3s;
-}
-
-.post-count__item--active::before, 
-.post-count__item:hover::before {
-    width: 100%;
-    transition: width 0.3s;
-}
 
 .filter-icon > svg{
     position: absolute;

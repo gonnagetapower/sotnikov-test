@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Post } from '../components';
+import { CountPage, Post } from '../components';
 import axios from 'axios';
 
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
@@ -137,26 +137,13 @@ const PostPage = () => {
       <h1 className="post-page__title">Лента постов</h1>
       <section className="posts">
         <div className="post-container">
-          <div className="post-count">
-            <h2 className="post-count__title">Количество записей:</h2>
-            <ul className="list-reset post-count__list">
-              {counstValues.map((value, index) => (
-                <li
-                  key={index}
-                  onClick={() => handleCount(index)}
-                  className={
-                    activeCount == index
-                      ? 'post-count__item post-count__item--active'
-                      : 'post-count__item'
-                  }>
-                  {value}
-                </li>
-              ))}
-            </ul>
-            <div onClick={() => setHideFilters(!hideFilters)} className="filter-icon">
-              <Filter />
-            </div>
-          </div>
+          <CountPage
+            counstValues={counstValues}
+            handleCount={handleCount}
+            activeCount={activeCount}
+            setHideFilters={setHideFilters}
+            hideFilters={hideFilters}
+          />
           <div className={!hideFilters ? 'filter' : 'filter--hide'}>
             <h3 className="filter__item">
               <Search onSearch={onSearch} placeholder="search by title" />
