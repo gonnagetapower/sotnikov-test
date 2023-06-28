@@ -19,35 +19,37 @@ const AlbumPage = () => {
     fetchAlbums().then((album) => setAlbums(album));
   }, []);
   return (
-    <>
-      <div className="pagination">
-        <ConfigProvider
-          theme={{
-            components: {
-              Pagination: {
-                colorPrimary: '#FA7E61',
-                colorPrimaryHover: '#FD613E',
+    <div className="album-page">
+      <div className="album-container">
+        <div className="pagination">
+          <ConfigProvider
+            theme={{
+              components: {
+                Pagination: {
+                  colorPrimary: '#FA7E61',
+                  colorPrimaryHover: '#FD613E',
+                },
               },
-            },
-          }}>
-          <Pagination
-            responsive={true}
-            simple
-            current={page}
-            onChange={(page) => setPage(page)}
-            total={100}
-            pageSize={pageSize}
-          />
-        </ConfigProvider>
+            }}>
+            <Pagination
+              responsive={true}
+              simple
+              current={page}
+              onChange={(page) => setPage(page)}
+              total={100}
+              pageSize={pageSize}
+            />
+          </ConfigProvider>
+        </div>
+        <div className="albums-grid">
+          {albums.map((album) => (
+            <div className="album">
+              <h3 className="album__title">{album.title}</h3>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="albums-container">
-        {albums.map((album) => (
-          <div className="album">
-            <h3 className="album__title">{album.title}</h3>
-          </div>
-        ))}
-      </div>
-    </>
+    </div>
   );
 };
 

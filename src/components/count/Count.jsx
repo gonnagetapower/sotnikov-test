@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ReactComponent as Filter } from './../../assets/svg/filter.svg';
 
-import './CountPage.css';
+import './Count.css';
 
 const CountPage = ({
   setHideFilters,

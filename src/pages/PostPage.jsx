@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CountPage, Post } from '../components';
+import { Count, Post } from '../components';
 import axios from 'axios';
 
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
@@ -23,9 +23,10 @@ const items = [
   },
 ];
 
+const counstValues = [10, 20, 50, 100];
+
 const PostPage = () => {
   const [posts, setPosts] = useState([]);
-  const counstValues = [10, 20, 50, 100];
   const [activeCount, setActiveCount] = useState(
     localStorage.getItem('activeCount') !== null
       ? localStorage.getItem('activeCount')
@@ -96,7 +97,6 @@ const PostPage = () => {
       setActiveFilter(`By ${type} asc`);
     }
     setPosts(sorted);
-    console.log(sorted);
   };
 
   const [sortByFav, setSortByFav] = useState(false);
@@ -109,7 +109,6 @@ const PostPage = () => {
         : storageItem.indexOf(b.id) - storageItem.indexOf(a.id),
     );
     setSortByFav(!sortByFav);
-    console.log(sortByFav);
     setPosts(sorted);
   };
 
@@ -130,7 +129,7 @@ const PostPage = () => {
       <h1 className="post-page__title">Лента постов</h1>
       <section className="posts">
         <div className="post-container">
-          <CountPage
+          <Count
             counstValues={counstValues}
             handleCount={handleCount}
             activeCount={activeCount}

@@ -1,8 +1,8 @@
 export { default as Comment }
     from './comment/Comment.jsx'
 
-export { default as CountPage }
-    from './countPage/CountPage.jsx'
+export { default as Count }
+    from './count/Count.jsx'
 
 export { default as EditPage }
     from './editPage/EditPage.jsx'
