@@ -10,3 +10,8 @@ export const fetchPosts = async () => {
     const { data } = await $api.get(`posts`)
     return data;
 }
+
+export const fetchAlbums = async () => {
+    const { data } = await $api.get(`albums`)
+    return data;
+}

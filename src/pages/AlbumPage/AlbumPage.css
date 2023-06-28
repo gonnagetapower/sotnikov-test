@@ -1,0 +1,78 @@
+.albums-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 15px 0px;
+}
+
+.album {
+    width: 500px;
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    transition: height 1s;
+    overflow: hidden;
+}
+
+.album__title {
+    z-index: 20;
+}
+.album:hover {
+    cursor: pointer;
+}
+
+.album:hover::before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #635d5d;
+    opacity: 0.2;
+}
+
+
+.album::after {
+    z-index: -1;
+    content: 'View album';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    font-size: 82px;
+    overflow: hidden;
+    color: #fff;
+    opacity: 0;
+    transition: transform 0.3s;
+}
+
+.album:hover::after {
+    z-index: -1;
+    content: 'View album';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(0);
+    font-size: 82px;
+    font-weight: 700;
+    overflow: hidden;
+    color: #fff;
+    opacity: 1;
+}

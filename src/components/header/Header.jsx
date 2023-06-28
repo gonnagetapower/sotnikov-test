@@ -15,7 +15,7 @@ const items = [
   },
   {
     label: (
-      <Link to="/photo" rel="noopener noreferrer">
+      <Link to="/album" rel="noopener noreferrer">
         Photos
       </Link>
     ),
