@@ -8,6 +8,7 @@ import { ReactComponent as Filter } from './../assets/svg/filter.svg';
 
 import './PostPage.css';
 import { ConfigProvider, Dropdown, Input, Pagination, Space } from 'antd';
+import { fetchPosts } from '../http/api';
 
 const { Search } = Input;
 
@@ -119,13 +120,14 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        `https://jsonplaceholder.typicode.com/posts?title_like=${filterValue}&_start=0&_limit=${pageSize}&_page=${page}`,
-      )
-      .then((post) => {
-        setPosts(post.data);
-      });
+    // axios
+    //   .get(
+    //     `https://jsonplaceholder.typicode.com/posts?title_like=${filterValue}&_start=0&_limit=${pageSize}&_page=${page}`,
+    //   )
+    //   .then((post) => {
+    //     setPosts(post.data);
+    //   });
+    fetchPosts().then((post) => setPosts(post));
   }, [activeCount, page, pageSize, filterValue]);
 
   const onSearch = (value) => setFilterValue(value);
