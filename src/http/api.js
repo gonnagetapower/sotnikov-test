@@ -6,8 +6,8 @@ const $api = axios.create({
     baseURL: 'https://jsonplaceholder.typicode.com/'
 })
 
-export const fetchPosts = async () => {
-    const { data } = await $api.get(`posts`)
+export const fetchPosts = async (filterValue, pageSize, page) => {
+    const { data } = await $api.get(`posts?title_like=${filterValue}&_start=0&_limit=${pageSize}&_page=${page}`)
     return data;
 }
 

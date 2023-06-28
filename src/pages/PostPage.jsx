@@ -120,14 +120,7 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    // axios
-    //   .get(
-    //     `https://jsonplaceholder.typicode.com/posts?title_like=${filterValue}&_start=0&_limit=${pageSize}&_page=${page}`,
-    //   )
-    //   .then((post) => {
-    //     setPosts(post.data);
-    //   });
-    fetchPosts().then((post) => setPosts(post));
+    fetchPosts(filterValue, pageSize, page).then((post) => setPosts(post));
   }, [activeCount, page, pageSize, filterValue]);
 
   const onSearch = (value) => setFilterValue(value);
@@ -147,13 +140,6 @@ const PostPage = () => {
           <div className={!hideFilters ? 'filter' : 'filter--hide'}>
             <h3 className="filter__item">
               <Search onSearch={onSearch} placeholder="search by title" />
-              {/* {filterOrder.title !== 'title' ? (
-                <DownOutlined
-                  onClick={() => setFilterOrder({ title: 'title', active: 'true' })}
-                />
-              ) : (
-                <UpOutlined onClick={() => setFilterOrder({})} />
-              )} */}
             </h3>
             <Dropdown
               className="filter-list"
