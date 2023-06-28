@@ -10,6 +10,9 @@ export { default as EditPage }
 export { default as Favorite }
     from './favorite/Favorite.jsx'
 
+export { default as FilterMenu }
+    from './filterMenu/FilterMenu.jsx'
+
 export { default as Header }
     from './header/Header.jsx'
 

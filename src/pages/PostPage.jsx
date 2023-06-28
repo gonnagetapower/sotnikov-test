@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Count, Post } from '../components';
-import axios from 'axios';
-
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
-
-import { ReactComponent as Filter } from './../assets/svg/filter.svg';
+import { Count, FilterMenu, Post } from '../components';
 
 import './PostPage.css';
 import { ConfigProvider, Dropdown, Input, Pagination, Space } from 'antd';
 import { fetchPosts } from '../http/api';
-
-const { Search } = Input;
 
 const items = [
   {
@@ -136,24 +129,15 @@ const PostPage = () => {
             setHideFilters={setHideFilters}
             hideFilters={hideFilters}
           />
-          <div className={!hideFilters ? 'filter' : 'filter--hide'}>
-            <h3 className="filter__item">
-              <Search onSearch={onSearch} placeholder="search by title" />
-            </h3>
-            <Dropdown
-              className="filter-list"
-              menu={{ items, onClick }}
-              trigger={['click']}>
-              <div>
-                {activeFilter}
-                <DownOutlined />
-              </div>
-            </Dropdown>
-            <h3 className="filter__item" onClick={sortByFavorite}>
-              By user favorite
-              {!sortByFav ? <DownOutlined /> : <UpOutlined />}
-            </h3>
-          </div>
+          <FilterMenu
+            hideFilters={hideFilters}
+            onSearch={onSearch}
+            onClick={onClick}
+            items={items}
+            activeFilter={activeFilter}
+            sortByFavorite={sortByFavorite}
+            sortByFav={sortByFav}
+          />
           <div className="pagination">
             <ConfigProvider
               theme={{

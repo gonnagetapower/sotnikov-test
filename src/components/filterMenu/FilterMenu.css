@@ -1,26 +1,4 @@
-.post-page__title {
-    text-align: center;
-    padding-bottom: 5px;
-}
-.post-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-
-
-.filter-icon > svg{
-    position: absolute;
-    top: 55%;
-    right: 5%;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 27px;
-    cursor: pointer;
-}
-
-/* .filter {
+.filter {
     height: auto;
     opacity: 1;
     border: 1px solid #cecdcd;
@@ -55,16 +33,4 @@
 .filter-list {
     display: flex;
     gap: 5px;
-} */
-
-.pagination  {
-    display: flex;
-    justify-content: center;
-}
-
-.posts {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    align-items: flex-start;
 }
